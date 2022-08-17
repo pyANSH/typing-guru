@@ -9,7 +9,7 @@ function App() {
   const [text2, setText2] = useState("")
   const [character, setCharacter] = useState('')
   const [inputChar, setInputChar] = useState('')
-  const [validStr, setValidStr] = useState('sdf')
+  const [validStr, setValidStr] = useState('asdf')
   const [length, setLength] = useState(50)
 
   const [correct, setCorrect] = useState({
@@ -55,6 +55,16 @@ function App() {
     for (let index = 0; index < length; index++) {
       var res = res + x.charAt(Math.floor(Math.random() * (Math.floor(Math.random() * 10))))
     }
+    if (res[0] == ' ') {
+      for (let i = 0; i < res.length; i++) {
+        if (res[i] != ' ') {
+          break
+        }
+        else {
+          res.substring(1)
+        }
+      }
+    }
     setInputChar(res)
     setText2('')
   }
@@ -88,17 +98,17 @@ function App() {
       window.alert('press start to start typing')
     }
   }
-  const add_validChar = (str) => {
-    setValidStr(validStr + str)
-  }
-  const valueCheck = (a) => {
-    if (a in validStr) {
-      return true
-    }
-    else {
-      return false
-    }
-  }
+  // const add_validChar = (str) => {
+  //   setValidStr(validStr + str)
+  // }
+  // const valueCheck = (a) => {
+  //   if (a in validStr) {
+  //     return true
+  //   }
+  //   else {
+  //     return false
+  //   }
+  // }
   function restart() {
     // stringGenerate()
     info()
@@ -155,6 +165,7 @@ function App() {
       <p>TotalErrors = {errorCount} </p>
       <p>Time = {toHHMMSS((time / 1000))} </p>
       <p>Speed = {speed} wpm </p>
+      <p>toPress =' {inputChar[0]} '</p>
       <div className="valid_char_option">
         {/* <button onClick={(e) => { add_validChar(e.target.value) }} className={(x) => { (valueCheck(x.target.value)) ? 'select' : 'not_select' }} value='a'>a</button> */}
       </div>
@@ -173,11 +184,15 @@ function App() {
           } />
       </div>
       <div className="title char_area">
-        <h1 className="typed">
+        <h1 className="typed" style={{
+          marginRight: inputChar[0] === ' ' ? '20px' : '1px'
+        }}>
           {text2}
         </h1>
 
-        <h1 className="to_type">
+        <h1 className="to_type" style={{
+          marginLeft: inputChar[0] === ' ' ? '20px' : '1px'
+        }}>
           {inputChar}
         </h1>
       </div>
