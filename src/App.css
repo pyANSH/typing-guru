@@ -27,7 +27,7 @@ body {
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
 }
 .setting {
@@ -52,7 +52,19 @@ body {
 }
 .typed {
   color: var(--typed-color);
-  /* margin-right: 20px; */
+}
+.typed h1::after {
+  content: "";
+  width: 5px;
+  height: 20px;
+  background: #ec7fff;
+  display: inline-block;
+  animation-name: cursor-blink;
+}
+@keyframes cursor-blink {
+  0% {
+    opacity: 0;
+  }
 }
 .keyboard {
   display: flex;
@@ -102,9 +114,9 @@ li {
 }
 .selected {
   background-color: transparent;
-  -webkit-animation: vibrate-1 0.3s linear infinite both;
-  animation: vibrate-1 0.3s linear infinite both;
+  animation: select 3s all;
 }
+
 .valid_char_option button {
   height: 1.5rem;
   width: 1.5rem;
@@ -120,4 +132,39 @@ li {
 }
 .not_select {
   background-color: #f5f0f0;
+}
+.info {
+  display: flex;
+  justify-content: stretch;
+}
+.info p {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--type-font);
+  color: grey;
+  margin: 0.5rem 1rem;
+}
+.info p span {
+  color: black;
+}
+hr-break {
+  width: 40%;
+}
+
+.not_supported {
+  display: None;
+}
+@media (max-width: 1151px) {
+  .App {
+    width: 90%;
+  }
+}
+
+@media (max-width: 821px) {
+  .not_supported {
+    display: block;
+  }
+  .App {
+    display: None;
+  }
 }

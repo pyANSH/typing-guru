@@ -34,7 +34,6 @@ function isValid(key, queue) {
 }
 function accuracy(key, error = {}, correct = {}) {
     if (isValid == true) {
-
         correct[key].update(correct[key] + 1);
         return true
     }
