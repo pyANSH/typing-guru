@@ -1,61 +1,187 @@
 import logo from './logo.svg';
 import './App.css';
-import { useEffect, useState } from 'react';
-
-
+import { useEffect, useState, useRef } from 'react';
 
 function App() {
+  const inputReference = useRef(null);
 
   const [text, setText] = useState("")
-  const [text2, setText2] = useState(" ")
+  const [text2, setText2] = useState("")
   const [character, setCharacter] = useState('')
   const [inputChar, setInputChar] = useState('')
-  const [validStr, setValidStr] = useState('asdf')
+  const [validStr, setValidStr] = useState('sdf')
   const [length, setLength] = useState(50)
-  // window.addEventListener('onkey')
+
+  const [correct, setCorrect] = useState({
+    ' ': 0, a: 1, b: 0, c: 0, d: 0, e: 0, f: 0, g: 0, h: 0, i: 0, j: 0, k: 0, l: 0, m: 0, n: 0, o: 0, p: 0, q: 0, r: 0, s: 0, t: 0, u: 0, v: 0, w: 0, x: 0, y: 0, z: 0
+  })
+  const [error, setError] = useState({
+    ' ': 0, a: 1, b: 0, c: 0, d: 0, e: 0, f: 0, g: 0, h: 0, i: 0, j: 0, k: 0, l: 0, m: 0, n: 0, o: 0, p: 0, q: 0, r: 0, s: 0, t: 0, u: 0, v: 0, w: 0, x: 0, y: 0, z: 0
+  })
+
+  const [time, setTime] = useState(0);
+
+  const [errorCount, setErrorCount] = useState(0)
+  const [correctCount, setCorrectCount] = useState(0)
+
+  const [accuracy, setAccuracy] = useState(0)
+  const [totalWords, setTotalWords] = useState(0)
+  const [changeInAccuracy, setChangeInAccuracy] = useState(0)
+  const [speed, setSpeed] = useState(0)
+
+  const [running, setRunning] = useState(false);
+
+  useEffect(() => {
+    let interval;
+    if (running) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else if (!running) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [running]);
 
   function stringGenerate() {
+    var y = validStr + ''
+    var letters = new Set();
+    for (let i = 0; i < y.length; i++) {
+      letters.add(y[i])
+    }
+    var x = Array.from(letters).join('')
+
     var res = ''
     for (let index = 0; index < length; index++) {
-      var res = res + validStr.charAt(Math.floor(Math.random() * (Math.floor(Math.random() * 10))))
+      var res = res + x.charAt(Math.floor(Math.random() * (Math.floor(Math.random() * 10))))
     }
     setInputChar(res)
+    setText2('')
   }
-  // function isValid(key, queue) {
-
-  // }
   const handleClick = (e) => {
-    if (e.key == inputChar[0]) {
-      setInputChar(inputChar.substring(1))
-      console.log('working')
+    if (running === true) {
+      setTotalWords(totalWords + 1)
+      if (e.key == inputChar[0]) {
+        var x = inputChar[0]
+        setText2(text2 + x)
+        setInputChar(inputChar.substring(1))
+        let a = e.key
+        var m = { a: correct[e.key] + 1 }
+        setCorrectCount(correctCount + 1)
+        setCorrect(correct => ({
+          ...correct,
+          ...m
+        }))
+      }
+
+      else {
+        let a = e.key
+        var m = { a: error[e.key] + 1 }
+        setErrorCount(errorCount + 1)
+        setCorrect(error => ({
+          ...error,
+          ...m
+        }))
+      }
     }
     else {
-      console.log('error')
+      window.alert('press start to start typing')
     }
-
   }
+  const add_validChar = (str) => {
+    setValidStr(validStr + str)
+  }
+  const valueCheck = (a) => {
+    if (a in validStr) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+  function restart() {
+    // stringGenerate()
+    info()
+    triggerStopWatch()
+  }
+  function reset() {
+    setAccuracy(0)
+    setChangeInAccuracy(0)
+    setCorrectCount(0)
+    setErrorCount(0)
+    setTotalWords(0)
+    setSpeed(0)
+    setTime(0)
+  }
+  function info() {
+    let m = (correctCount / totalWords) * 100
+    setChangeInAccuracy(accuracy - m)
+    setAccuracy(m)
+    let a = ((time / (1000 * 60)))
+    let s = totalWords / a
+    setSpeed(s)
+  }
+  function triggerStopWatch() {
+    if (running === false) {
+      // setTime(0)
+      setRunning(true)
+    }
+    else {
+      setRunning(false)
+    }
+  }
+  useEffect(() => {
 
+    if (inputChar.length == 0) {
+      info()
+      stringGenerate()
+    }
+  }, [inputChar])
+  const toHHMMSS = (secs) => {
+    var sec_num = parseInt(secs, 10)
+    var hours = Math.floor(sec_num / 3600)
+    var minutes = Math.floor(sec_num / 60) % 60
+    var seconds = sec_num % 60
 
+    return [hours, minutes, seconds]
+      .map(v => v < 10 ? "0" + v : v)
+      .filter((v, i) => v !== "00" || i > 0)
+      .join(":")
+  }
   return (
-    <div className="App">
-      <input type="text"
-        readOnly={true}
-        onKeyDown={(e) =>
-          handleClick(e)
-        } />
-      <input type="text" value={validStr} onChange={(e) => {
-        setValidStr(e.target.value)
-      }} />
-      <input type="text" value={length} onChange={(e) => {
-        setLength(e.target.value)
-      }} />
-      <button onClick={stringGenerate}>Generate String</button>
 
+    <div className="App" >
+      <p>Accuracy = {accuracy}({(changeInAccuracy === NaN) ? ' ' : changeInAccuracy > 0 ? ('+' + changeInAccuracy) : changeInAccuracy}%)</p>
+      <p>TotalErrors = {errorCount} </p>
+      <p>Time = {toHHMMSS((time / 1000))} </p>
+      <p>Speed = {speed} wpm </p>
+      <div className="valid_char_option">
+        {/* <button onClick={(e) => { add_validChar(e.target.value) }} className={(x) => { (valueCheck(x.target.value)) ? 'select' : 'not_select' }} value='a'>a</button> */}
+      </div>
+      <div className="setting">
+        <input type="text" value={validStr} onChange={(e) => {
+          setValidStr(e.target.value)
+        }} />
+        <button onClick={stringGenerate}>Generate String</button>
+        <button onClick={restart}>{(running === false) ? 'start' : 'Stop'}</button>
+        <button onClick={reset}>reset Values</button>
+        <input type="text"
+          className=''
+          readOnly={true}
+          onKeyDown={(e) =>
+            handleClick(e)
+          } />
+      </div>
+      <div className="title char_area">
+        <h1 className="typed">
+          {text2}
+        </h1>
 
+        <h1 className="to_type">
+          {inputChar}
+        </h1>
+      </div>
       <div className="keyboard">
-
-        <h1 className="title">{inputChar}</h1>
-        <h1 className="title">{text2}</h1>
         <div className="keyboard">
           <ul className="row row-0">
             <li className="key" id="esc">ESC</li>

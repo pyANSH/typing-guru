@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 * {
   margin: 0%;
   padding: 0%;
@@ -5,82 +6,117 @@
 }
 :root {
   --background-color: #fff;
-  --key-color: #e5e5e5;
+  --key-color: #f5f0f0;
   --text-size: 24px;
+  --type-font: "Ubuntu Mono", monospace;
+  --typed-color: grey;
+  --to_type-color: #26243d;
 }
 body {
   background-color: var(--background-color);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 500;
+  /* font-weight: 500;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100vh; */
 }
-
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  width: 80%;
+  margin: 0 auto;
+}
+.setting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .title {
   color: black;
-  text-transform: uppercase;
-  margin-top: 3em;
-  margin-bottom: 3em;
   font-size: 1em;
   letter-spacing: 0.3em;
+  display: flex;
+  margin: 3em auto;
+  text-align: center;
 }
-
+.title h1 {
+  font-family: var(--type-font);
+  font-size: 28px;
+}
+.to_type {
+  color: var(--to_type-color);
+}
+.typed {
+  color: var(--typed-color);
+}
 .keyboard {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
 }
-
 .row {
   list-style: none;
   display: flex;
 }
-
+.char_area {
+  height: 10%;
+  text-align: center;
+}
 li {
   height: 3em;
   width: 3em;
   color: rgba(0, 0, 0, 0.7);
-  border-radius: 0.4em;
   line-height: 3em;
   letter-spacing: 1px;
-  margin: 0.4em;
+  margin: 1px;
   transition: 0.3s;
   text-align: center;
   font-size: 1em;
 }
-
 #tab {
   width: 5em;
 }
-
 #caps {
   width: 6em;
 }
-
 #left-shift {
   width: 8em;
 }
-
 #enter {
   width: 6em;
 }
-
 #right-shift {
   width: 8em;
 }
-
 #back {
   width: 5em;
 }
 .key {
-  border: 0.5px solid black;
+  border: 0.5px solid #f5f0f0;
   background-color: var(--key-color);
 }
-
 .selected {
   background-color: transparent;
   -webkit-animation: vibrate-1 0.3s linear infinite both;
   animation: vibrate-1 0.3s linear infinite both;
+}
+.valid_char_option button {
+  height: 1.5rem;
+  width: 1.5rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+}
+.select {
+  background-color: aqua;
+}
+.not_select {
+  background-color: #f5f0f0;
 }
