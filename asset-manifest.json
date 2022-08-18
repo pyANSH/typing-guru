@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/typing-guru/static/css/main.bdb3083d.css",
-    "main.js": "/typing-guru/static/js/main.690f0980.js",
+    "main.css": "/typing-guru/static/css/main.447f21a4.css",
+    "main.js": "/typing-guru/static/js/main.67f84581.js",
     "static/js/787.6fce2fbf.chunk.js": "/typing-guru/static/js/787.6fce2fbf.chunk.js",
     "index.html": "/typing-guru/index.html",
-    "main.bdb3083d.css.map": "/typing-guru/static/css/main.bdb3083d.css.map",
-    "main.690f0980.js.map": "/typing-guru/static/js/main.690f0980.js.map",
+    "main.447f21a4.css.map": "/typing-guru/static/css/main.447f21a4.css.map",
+    "main.67f84581.js.map": "/typing-guru/static/js/main.67f84581.js.map",
     "787.6fce2fbf.chunk.js.map": "/typing-guru/static/js/787.6fce2fbf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bdb3083d.css",
-    "static/js/main.690f0980.js"
+    "static/css/main.447f21a4.css",
+    "static/js/main.67f84581.js"
   ]
 }
