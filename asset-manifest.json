@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/typing-guru/static/css/main.6d7a8051.css",
-    "main.js": "/typing-guru/static/js/main.6f840438.js",
+    "main.css": "/typing-guru/static/css/main.bdb3083d.css",
+    "main.js": "/typing-guru/static/js/main.acb4404f.js",
     "static/js/787.6fce2fbf.chunk.js": "/typing-guru/static/js/787.6fce2fbf.chunk.js",
     "static/media/logo.svg": "/typing-guru/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/typing-guru/index.html",
-    "main.6d7a8051.css.map": "/typing-guru/static/css/main.6d7a8051.css.map",
-    "main.6f840438.js.map": "/typing-guru/static/js/main.6f840438.js.map",
+    "main.bdb3083d.css.map": "/typing-guru/static/css/main.bdb3083d.css.map",
+    "main.acb4404f.js.map": "/typing-guru/static/js/main.acb4404f.js.map",
     "787.6fce2fbf.chunk.js.map": "/typing-guru/static/js/787.6fce2fbf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6d7a8051.css",
-    "static/js/main.6f840438.js"
+    "static/css/main.bdb3083d.css",
+    "static/js/main.acb4404f.js"
   ]
 }
