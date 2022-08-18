@@ -111,12 +111,15 @@ li {
 .key {
   border: 0.5px solid #f5f0f0;
   background-color: var(--key-color);
+  border-radius: 2px;
 }
 .selected {
-  background-color: transparent;
-  animation: select 3s all;
+  background: green;
+  color: white;
 }
-
+.incorrect {
+  background-color: red;
+}
 .valid_char_option button {
   height: 1.5rem;
   width: 1.5rem;
@@ -127,8 +130,36 @@ li {
   border: none;
   outline: none;
 }
-.select {
-  background-color: aqua;
+.selected {
+  background-color: black;
+}
+.inputArea {
+  height: 2rem;
+  margin: 1rem auto;
+  width: 80%;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 8px;
+}
+::placeholder {
+  text-align: center;
+}
+.btn-reset {
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  width: 8rem;
+  height: 2rem;
+  margin: 0 1rem;
+}
+.form {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+}
+.form span {
+  margin: 0.5rem;
+  font-family: var(--type-font);
+  color: grey;
 }
 .not_select {
   background-color: #f5f0f0;
@@ -136,6 +167,7 @@ li {
 .info {
   display: flex;
   justify-content: stretch;
+  margin: 0.5rem;
 }
 .info p {
   font-size: 14px;
