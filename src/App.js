@@ -157,10 +157,9 @@ function App() {
       </div>
       <div className="App" >
         <div className="info">
-          <p> Speed : <span> {(speed / 6)} wpm </span></p>
-          <p> accuracy : <span> {accuracy}({(changeInAccuracy === NaN || changeInAccuracy === 0) ? ' ' : changeInAccuracy} %) </span></p>
+          <p> Speed : <span> {Math.round((speed / 6) * 100) / 100} wpm </span></p>
+          <p> accuracy : <span> {Math.round(accuracy * 100) / 100}({(changeInAccuracy === NaN || changeInAccuracy === 0) ? ' ' : changeInAccuracy} %) </span></p>
           <p>Time escaped : <span>{toHHMMSS((time / 1000))}<i>({(running === false) ? 'paused' : 'running'})</i></span></p>
-          <p>Total key Error : <span>{errorCount}</span></p>
           <button onClick={submit} className='btn-reset'>reset</button>
         </div>
         <hr className='hr-break' />
@@ -177,9 +176,9 @@ function App() {
             <input value='abcdefghijklmnopqrstuvwxyz1234567890' checked={validStr === 'abcdefghijklmnopqrstuvwxyz1234567890'} name='nightmare' type="radio" onChange={(e) => {
               setValidStr(e.target.value)
             }} /><span>a-z 0-9</span>
-            <input value='abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+{}|:">?<-=[];,./' checked={validStr === 'abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+{}|:">?<-=[];,./'} name='God' type="radio" onChange={(e) => {
+            {/* <input value='abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+{}|:">?<-=[];,./' checked={validStr === 'abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+{}|:">?<-=[];,./'} name='God' type="radio" onChange={(e) => {
               setValidStr(e.target.value)
-            }} /><span>all keys(a-z A-Z 0-9 symbols)</span>
+            }} /><span>all keys(a-z A-Z 0-9 symbols)</span> */}
             <button onClick={stringGenerate} className='btn-reset'>Generate String</button>
           </div>
         </div>

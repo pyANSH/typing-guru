@@ -9,7 +9,7 @@
   --key-color: #f5f0f0;
   --text-size: 24px;
   --type-font: "Ubuntu Mono", monospace;
-  --typed-color: grey;
+  --typed-color: rgb(173, 172, 172);
   --to_type-color: #26243d;
 }
 body {
@@ -49,9 +49,11 @@ body {
 }
 .to_type {
   color: var(--to_type-color);
+  font-weight: 500;
 }
 .typed {
   color: var(--typed-color);
+  font-weight: 100;
 }
 .typed h1::after {
   content: "";
@@ -153,7 +155,7 @@ li {
 }
 .form {
   display: flex;
-  justify-content: stretch;
+  justify-content: space-between;
   align-items: center;
 }
 .form span {
@@ -166,7 +168,7 @@ li {
 }
 .info {
   display: flex;
-  justify-content: stretch;
+  justify-content: space-between;
   margin: 0.5rem;
 }
 .info p {
@@ -182,7 +184,10 @@ li {
 hr-break {
   width: 40%;
 }
-
+#myChart {
+  height: 100vh;
+  width: 100vw;
+}
 .not_supported {
   display: None;
 }
