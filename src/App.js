@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState, useRef } from 'react';
-import Typewriter from 'typewriter-effect/dist/core'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
@@ -12,9 +10,8 @@ function App() {
   const [text2, setText2] = useState("")
   const [inputChar, setInputChar] = useState('')
   const [validStr, setValidStr] = useState('asdfjkl;')
-  const [length, setLength] = useState(30)
+  const length = 30
   const [toPress, setToPress] = useState('')
-  const [validStr2, setValidStr2] = useState()
 
   const [correct, setCorrect] = useState({
     ' ': 0, a: 0, b: 0, c: 0, d: 0, e: 0, f: 0, g: 0, h: 0, i: 0, j: 0, k: 0, l: 0, m: 0, n: 0, o: 0, p: 0, q: 0, r: 0, s: 0, t: 0, u: 0, v: 0, w: 0, x: 0, y: 0, z: 0
@@ -54,11 +51,10 @@ function App() {
     for (let i = 0; i < y.length; i++) {
       letters.add(y[i])
     }
-    var x = Array.from(letters).join('')
-
     var res = ''
+    var x = Array.from(letters).join('')
     for (let index = 0; index < length; index++) {
-      var res = res + x.charAt(Math.floor(Math.random() * (Math.floor(Math.random() * 10))))
+      res = res + x.charAt(Math.floor(Math.random() * (Math.floor(Math.random() * 10))))
     }
 
     setInputChar(res)
@@ -69,13 +65,13 @@ function App() {
     setKeyPressed(l)
 
     setTotalWords(totalWords + 1)
-    if (l == inputChar[0]) {
+    if (l === inputChar[0]) {
       var x = inputChar[0]
       setToPress(inputChar[0])
       setText2(text2 + x)
       setInputChar(inputChar.substring(1))
       let a = l
-      var m = { a: correct[l] + 1 }
+      var m = { a: correct[a] + 1 }
       setCorrectCount(correctCount + 1)
       setCorrect(correct => ({
         ...correct,
@@ -85,11 +81,11 @@ function App() {
 
     else {
       let a = l
-      var m = { a: error[l] + 1 }
+      var o = { a: error[a] + 1 }
       setErrorCount(errorCount + 1)
       setCorrect(error => ({
         ...error,
-        ...m
+        ...o
       }))
     }
   }
@@ -111,21 +107,12 @@ function App() {
     let s = totalWords / a
     setSpeed(Number((s).toFixed(1)))
   }
-  function triggerStopWatch() {
-    if (running === false) {
-      // setTime(0)
-      setRunning(true)
-    }
-    else {
-      setRunning(false)
-    }
-  }
   useEffect(() => {
-    if (inputChar.length == 0) {
+    if (inputChar.length === 0) {
       info()
       stringGenerate()
     }
-  }, [inputChar])
+  })
   const toHHMMSS = (secs) => {
     var sec_num = parseInt(secs, 10)
     var hours = Math.floor(sec_num / 3600)
@@ -181,16 +168,16 @@ function App() {
           <p> current Key :<span>'{inputChar[0]}'</span></p>
           {/* <p> string :<span>'{validStr}'</span></p> */}
           <div className='form'>
-            <input value='asdfjkl;' name='easy' checked={validStr == 'asdfjkl;'} type="radio" onChange={(e) => {
+            <input value='asdfjkl;' name='easy' checked={validStr === 'asdfjkl;'} type="radio" onChange={(e) => {
               setValidStr(e.target.value)
             }} /> <span>ASDFJKL;</span>
-            <input value='abcdefghijklmnopqrstuvwxyz' checked={validStr == 'abcdefghijklmnopqrstuvwxyz'} name='hardcore' type="radio" onChange={(e) => {
+            <input value='abcdefghijklmnopqrstuvwxyz' checked={validStr === 'abcdefghijklmnopqrstuvwxyz'} name='hardcore' type="radio" onChange={(e) => {
               setValidStr(e.target.value)
             }} /><span>a-z</span>
-            <input value='abcdefghijklmnopqrstuvwxyz1234567890' checked={validStr == 'abcdefghijklmnopqrstuvwxyz1234567890'} name='nightmare' type="radio" onChange={(e) => {
+            <input value='abcdefghijklmnopqrstuvwxyz1234567890' checked={validStr === 'abcdefghijklmnopqrstuvwxyz1234567890'} name='nightmare' type="radio" onChange={(e) => {
               setValidStr(e.target.value)
             }} /><span>a-z 0-9</span>
-            <input value='abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+{}|:">?<-=[];,./' checked={validStr == 'abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+{}|:">?<-=[];,./'} name='God' type="radio" onChange={(e) => {
+            <input value='abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+{}|:">?<-=[];,./' checked={validStr === 'abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+{}|:">?<-=[];,./'} name='God' type="radio" onChange={(e) => {
               setValidStr(e.target.value)
             }} /><span>all keys(a-z A-Z 0-9 symbols)</span>
             <button onClick={stringGenerate} className='btn-reset'>Generate String</button>
