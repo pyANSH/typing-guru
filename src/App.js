@@ -2,7 +2,8 @@ import './App.css';
 import { useEffect, useState, useRef } from 'react';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-
+import { useDispatch } from 'react-redux';
+import { setCorrectRedux, setIncorrectRedux, setIsRunningRedux, setTimerRedux } from './store/reducer/InputStatusSlice';
 function App() {
   const searchInput = useRef(null)
 
@@ -12,7 +13,6 @@ function App() {
   const [validStr, setValidStr] = useState('asdfjkl;')
   const length = 30
   const [toPress, setToPress] = useState('')
-
   const [correct, setCorrect] = useState({
     ' ': 0, a: 0, b: 0, c: 0, d: 0, e: 0, f: 0, g: 0, h: 0, i: 0, j: 0, k: 0, l: 0, m: 0, n: 0, o: 0, p: 0, q: 0, r: 0, s: 0, t: 0, u: 0, v: 0, w: 0, x: 0, y: 0, z: 0
   })
@@ -33,6 +33,7 @@ function App() {
 
   const [running, setRunning] = useState(false);
 
+  const dispatch = useDispatch()
   useEffect(() => {
     let interval;
     if (running) {
@@ -44,6 +45,14 @@ function App() {
     }
     return () => clearInterval(interval);
   }, [running]);
+
+  useEffect(() => {
+    console.log(correct, error, correctCount, errorCount)
+    dispatch(setCorrectRedux(correct))
+    dispatch(setIncorrectRedux(error))
+    dispatch(setIsRunningRedux(running))
+    dispatch(setTimerRedux(time))
+  }, [correct, error, running])
 
   function stringGenerate() {
     var y = validStr + ''
@@ -63,7 +72,6 @@ function App() {
   const handleClick = (e) => {
     let l = e.key.toLowerCase(e.key)
     setKeyPressed(l)
-
     setTotalWords(totalWords + 1)
     if (l === inputChar[0]) {
       var x = inputChar[0]
@@ -78,12 +86,11 @@ function App() {
         ...m
       }))
     }
-
     else {
       let a = l
       var o = { a: error[a] + 1 }
       setErrorCount(errorCount + 1)
-      setCorrect(error => ({
+      setError(error => ({
         ...error,
         ...o
       }))
@@ -176,20 +183,16 @@ function App() {
             <input value='abcdefghijklmnopqrstuvwxyz1234567890' checked={validStr === 'abcdefghijklmnopqrstuvwxyz1234567890'} name='nightmare' type="radio" onChange={(e) => {
               setValidStr(e.target.value)
             }} /><span>a-z 0-9</span>
-            {/* <input value='abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+{}|:">?<-=[];,./' checked={validStr === 'abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+{}|:">?<-=[];,./'} name='God' type="radio" onChange={(e) => {
-              setValidStr(e.target.value)
-            }} /><span>all keys(a-z A-Z 0-9 symbols)</span> */}
             <button onClick={stringGenerate} className='btn-reset'>Generate String</button>
           </div>
         </div>
         <hr className='hr-break' />
         <br />
         <div className="title char_area">
-          <h1 className="typed" >
+          <h1 className="typed">
             {text2}
           </h1>
-
-          <h1 className="to_type" >
+          <h1 className="to_type">
             {inputChar}
           </h1>
         </div>
